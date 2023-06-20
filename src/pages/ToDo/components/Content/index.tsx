@@ -71,7 +71,7 @@ export const Content = () => {
     }, [setTaskListState]);
 
     return (
-        <section className={styles.section_container}>
+        <section data-testid="content" className={styles.section_container}>
             <main>
                 <article className={styles.input_container}>
                     <input
