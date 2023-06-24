@@ -75,6 +75,7 @@ export const Content = () => {
       <main>
         <article className={styles.input_container}>
           <input
+            data-testid="input-description"
             className={styles.input}
             type="text"
             value={description}
