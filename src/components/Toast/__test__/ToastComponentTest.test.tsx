@@ -37,7 +37,18 @@ describe("<Toast Component>", () => {
             expect(toastElement).not.toBeNull();
         });
 
-        
+        it('Deve renderizar toast com o tipo de danger', () => {
+
+            const message = 'Success message';
+            const type = 'danger';
+
+            render(<Toast message={message} type={type} />);
+
+            const toastElement = screen
+                .findByText(/danger/i);
+
+            expect(toastElement).not.toBeNull();
+        });
 
     });
     
