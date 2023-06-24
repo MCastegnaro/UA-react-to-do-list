@@ -85,6 +85,7 @@ export const Content = () => {
             }
           />
           <button
+            data-testid="button-content"
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
