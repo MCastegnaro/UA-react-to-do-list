@@ -13,7 +13,7 @@ export default function NotFound() {
     console.error(error);
 
     return (
-        <section className={styles.error_page}>
+        <section data-testid="todoList" className={styles.error_page}>
             <h1>Oops!</h1>
             <p>Sorry, an unexpected error has occurred.</p>
             <p>
