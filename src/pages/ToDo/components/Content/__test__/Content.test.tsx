@@ -19,5 +19,4 @@ describe("<Content />", () => {
         const button = screen.getByTestId("button-content");
         expect(button).not.toBeNull();
     });
-
 });
