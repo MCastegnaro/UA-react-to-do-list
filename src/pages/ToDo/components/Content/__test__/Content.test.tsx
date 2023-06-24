@@ -1,10 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Content } from "..";
-import { describe, it, expect, vi } from "vitest";
-import { createTask } from "../../../../../services/task";
-import { ToastProvider } from "../../../../../contexts/Toast";
-import { api } from "../../../../../configs/api";
-import MockAdapter from "axios-mock-adapter";
+import { describe, it, expect } from "vitest";
 
 describe("<Content />", () => {
 
