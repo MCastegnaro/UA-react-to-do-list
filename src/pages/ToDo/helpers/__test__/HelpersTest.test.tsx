@@ -36,7 +36,7 @@ import { toggleTaskStatus } from '../index';
 
 describe('toggleTaskStatus', () => {
   it('Deve trocar o estado da task', () => {
-    // Arrange
+
     const taskList = [
       { id: '1', description: 'Task 1', isDone: false },
       { id: '2', description: 'Task 2', isDone: true },
@@ -44,30 +44,25 @@ describe('toggleTaskStatus', () => {
     ];
     const taskId = '2';
 
-    // Act
     const updatedTaskList = toggleTaskStatus(taskList, taskId);
 
-    // Assert
     expect(updatedTaskList).toEqual([
       { id: '1', description: 'Task 1', isDone: false },
-      { id: '2', description: 'Task 2', isDone: false }, // Toggle the status
+      { id: '2', description: 'Task 2', isDone: false },
       { id: '3', description: 'Task 3', isDone: false },
     ]);
   });
 
   it('Não deve alterar o estado da task se ela não for encontrada', () => {
-    // Arrange
     const taskList = [
       { id: '1', description: 'Task 1', isDone: false },
       { id: '2', description: 'Task 2', isDone: true },
     ];
-    const taskId = '3'; // ID not present in the task list
+    const taskId = '3'; 
 
-    // Act
     const updatedTaskList = toggleTaskStatus(taskList, taskId);
 
-    // Assert
-    expect(updatedTaskList).toEqual(taskList); // The task list should remain unchanged
+    expect(updatedTaskList).toEqual(taskList); 
   });
 });
 
