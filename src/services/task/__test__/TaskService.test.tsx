@@ -13,8 +13,6 @@ describe("<Task Services>", () => {
     mock.reset();
   })
 
-
-
   it("GetTasks deve retornar uma lista de tarefas", async () => {
     const tasks: Task[] = [
       { id: '01', description: 'Teste 01', isDone: false },
