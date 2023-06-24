@@ -1,21 +1,23 @@
 import { renderHook } from "@testing-library/react";
 import { useToast } from "..";
-import ToastContext, { ToastContextProps } from "../../../contexts/Toast";
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
+import { ToastProvider } from "../../../contexts/Toast";
 
-// const mockToastContext: ToastContextProps = {
-//   isHidden: false,
-//   showToast: jest.fn(),
-// };
+describe("useToast", () => {
+    it("Não deve funcionar o usetoast quando usado fora de ToastProvider", () => {
+        expect(() => {
+            renderHook(() => useToast());
+        }).toThrowError;
+    });
 
-it("Deve retornar o contexto corretamente", () => {
-//   const wrapper = ({ children }: { children: React.ReactNode }) => (
-//     <ToastContext.Provider value={mockToastContext}>
-//       {children}
-//     </ToastContext.Provider>
-//   );
+    it("Deve retornar o contexto corretamente quando usado dentro de um ToastProvider", () => {
+        const wrapper: React.FC<React.PropsWithChildren<{}>> = ({ children }) => (
+            <ToastProvider>{children}</ToastProvider>
+        );
 
-//   const { result } = renderHook(() => useToast(), { wrapper });
+        const { result } = renderHook(() => useToast(), { wrapper });
 
-//   expect(result.current).toEqual(mockToastContext);
+        expect(result.current).toBeDefined();
+        expect(result.current.showToast).toBeInstanceOf(Function);
+    });
 });
