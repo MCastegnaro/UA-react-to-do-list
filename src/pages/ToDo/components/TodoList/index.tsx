@@ -23,7 +23,7 @@ export const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
             {isTaskListEmpty ? (
                 <NoContent />
             ) : (
-                <section className={styles.section_container}>
+                <section data-testid="section-todo-list" className={styles.section_container}>
                     {taskListState.map((task) => (
                         <article
                             key={task.id}
