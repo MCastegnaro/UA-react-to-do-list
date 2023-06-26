@@ -79,6 +79,7 @@ export const Content = () => {
             type="text"
             value={description}
             placeholder="Adicione uma nova tarefa"
+            data-testid="input"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setDescription(event.target.value)
             }
@@ -87,6 +88,7 @@ export const Content = () => {
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
+            data-testid="button"
           >
             Criar
             <img src={Plus} alt="Ícone de mais" />
