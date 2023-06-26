@@ -15,7 +15,6 @@ describe("<Header/>", () => {
   })
 
   it("Deve renderizar o header corretamente", () => {
-    render(<Header />);
     const header = screen.getByTestId("header");
     expect(header).not.toBeNull();
   });
