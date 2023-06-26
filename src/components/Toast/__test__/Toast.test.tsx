@@ -13,7 +13,7 @@ describe("<ToastContext>", () => {
             mock.reset();
         });
 
-        it('Deve renderizar toast com mensagem de sucesso', () => {
+        it('renderizar mensagem de sucesso', () => {
             const message = 'Success message';
             const type = 'success';
 
@@ -25,7 +25,7 @@ describe("<ToastContext>", () => {
             expect(toastElement).not.toBeNull();
         });
 
-        it('Deve renderizar toast com o tipo de success', () => {
+        it('renderizar o tipo de success', () => {
 
             const message = 'Success message';
             const type = 'success';
@@ -38,7 +38,7 @@ describe("<ToastContext>", () => {
             expect(toastElement).not.toBeNull();
         });
 
-        it('Deve renderizar toast com o tipo de danger', () => {
+        it('renderizar tipo de danger', () => {
 
             const message = 'Success message';
             const type = 'danger';
