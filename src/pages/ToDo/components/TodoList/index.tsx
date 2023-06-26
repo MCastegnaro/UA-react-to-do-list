@@ -16,14 +16,12 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
         [taskListState.length]
     );
 
-    console.log("oi");
-
     return (
         <>
             {isTaskListEmpty ? (
                 <NoContent />
             ) : (
-                <section className={styles.section_container}>
+                <section data-testid="content" className={styles.section_container}>
                     {taskListState.map((task) => (
                         <article
                             key={task.id}

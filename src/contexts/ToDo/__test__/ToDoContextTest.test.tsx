@@ -1,65 +1,100 @@
-// import { render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
-// import ToDoContext, { ToDoContextProvider, ToDoContextProps } from "../index";
-// import { describe, it, expect } from "vitest";
-// import { useContext } from "react";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import ToDoContext, { ToDoContextProps, ToDoContextProvider } from "..";
+import React, { useContext } from "react";
 
-// // Mock do contexto
-// const mockContext: ToDoContextProps = {
-//   taskListState: [],
-//   setTaskListState: jest.fn(),
-// };
+export type Task = {
+    id: string;
+    description: string;
+    isDone: boolean;
+};
 
-// describe("ToDoContextProvider", () => {
-//   it("renderiza corretamente e fornece o contexto", () => {
-//     render(
-//       <ToDoContextProvider>
-//         <MockChildComponent />
-//       </ToDoContextProvider>
-//     );
+describe("ToastProvider", () => {
+    it("Deve renderizar um children quando passado por parâmetro", () => {
+        render(<ToDoContextProvider>
+            <h1>Testando o ToDo Provider</h1>
+        </ToDoContextProvider>)
 
-//     // Teste para garantir que o componente filho tenha recebido o contexto corretamente
-//     expect(screen.getByTestId("child-component")).toHaveTextContent(
-//       JSON.stringify(mockContext)
-//     );
-//   });
+        const childElement = screen.getByText(/Testando o ToDo Provider/i);
+        expect(childElement).not.toBeNull();
+    })
 
-//   it("atualiza o estado da lista de tarefas ao chamar a função de alteração", () => {
-//     render(
-//       <ToDoContextProvider>
-//         <MockChildComponent />
-//       </ToDoContextProvider>
-//     );
+    it("Deve fornecer o contexto correto para os componentes filhos", () => {
+        let contextValue: ToDoContextProps | undefined;
 
-//     const newTaskListState = [{ id: 1, title: "Nova tarefa" }];
+        const ChildComponent = () => {
+            const context = React.useContext<ToDoContextProps>(ToDoContext);
+            contextValue = context;
+            return null;
+        };
 
-//     // Simula a chamada da função de alteração do estado da lista de tarefas
-//     userEvent.click(screen.getByTestId("update-task-list-button"), {
-//       target: { value: newTaskListState },
-//     });
+        render(
+            <ToDoContextProvider>
+                <ChildComponent />
+            </ToDoContextProvider>
+        );
 
-//     // Testa se a função de alteração do estado foi chamada com o novo estado
-//     expect(mockContext.setTaskListState).toHaveBeenCalledWith(newTaskListState);
-//   });
-// });
+        expect(contextValue).toBeDefined();
+        expect(contextValue?.taskListState).toBeDefined();
+        expect(contextValue?.setTaskListState).toBeDefined();
+    });
 
-// // Componente fictício que consome o contexto
-// const MockChildComponent = () => {
-//   const context = useContext(ToDoContext);
+    it("Deve atualizar o estado do contexto corretamente", () => {
+        const ChildComponent = () => {
+            const { taskListState, setTaskListState } = React.useContext<ToDoContextProps>(ToDoContext);
 
-//   return (
-//     <div data-testid="child-component">
-//       {JSON.stringify(context)}
+            React.useEffect(() => {
+                setTaskListState([
+                    { id: "1", description: "Task 1", isDone: false },
+                    { id: "2", description: "Task 2", isDone: true }
+                ]);
+            }, []);
 
-//       <button
-//         onClick={() => {
-//           const newTaskListState = [{ id: 1, title: "Nova tarefa" }];
-//           context.setTaskListState(newTaskListState);
-//         }}
-//         data-testid="update-task-list-button"
-//       >
-//         Atualizar lista de tarefas
-//       </button>
-//     </div>
-//   );
-// };
+            return (
+                <>
+                    {taskListState.map((task) => (
+                        <div key={task.id}>{task.description}</div>
+                    ))}
+                </>
+            );
+        };
+
+        render(
+            <ToDoContextProvider>
+                <ChildComponent />
+            </ToDoContextProvider>
+        );
+
+        const taskElement1 = screen.getByText(/Task 1/i);
+        const taskElement2 = screen.getByText(/Task 2/i);
+
+        expect(taskElement1).toBeDefined();
+        expect(taskElement2).toBeDefined();
+    });
+
+    it("Deve atribuir os valores padrão corretamente", () => {
+        const TestComponent = () => {
+            const { taskListState, setTaskListState } = useContext<ToDoContextProps>(ToDoContext);
+
+            return (
+                <>
+                    <div data-testid="task-list">{JSON.stringify(taskListState)}</div>
+                    <div data-testid="set-task-list">{typeof setTaskListState}</div>
+                </>
+            );
+        };
+
+        render(
+            <ToDoContextProvider>
+                <TestComponent />
+            </ToDoContextProvider>
+        );
+
+        const taskListElement = screen.getByTestId("task-list");
+        const setTaskListElement = screen.getByTestId("set-task-list");
+
+        expect(taskListElement.textContent).toEqual("[]");
+        expect(setTaskListElement.textContent).toEqual("function");
+    });
+
+})

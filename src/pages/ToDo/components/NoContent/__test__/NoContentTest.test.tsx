@@ -1,11 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { NoContent } from "..";
 import { describe, it, expect } from "vitest";
+import { BrowserRouter } from "react-router-dom";
 
 describe("<NoContent />", () => {
 
+    beforeAll(() => {
+        render(<NoContent />, { wrapper: BrowserRouter })
+    })
+
     it('Deve renderizar a imagem em NoContent corretamente', () => {
-        render(<NoContent />);
         const img = screen.getByAltText("ícone de clipboard");
         expect(img).not.toBeNull();
     })

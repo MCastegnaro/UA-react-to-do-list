@@ -1,55 +1,48 @@
-import { beforeAll, describe, expect, it } from "vitest";import { Toast } from "..";
 import { render, screen } from "@testing-library/react";
-import MockAdapter from "axios-mock-adapter";
-import { api } from "../../../configs/api";
-
-
-const mock = new MockAdapter(api);
+import { describe, expect, it } from "vitest";
+import { Toast } from "..";
+// import { axe } from "jest-axe";
+import '@testing-library/jest-dom/extend-expect';
 
 describe("<Toast Component>", () => {
-    describe('Toast', () => {
-        beforeAll(() => {
-            mock.reset();
-        });
+  it('Deve renderizar o Toast com uma mensagem de sucesso', () => {
+    const message = 'Success message';
+    const type = 'success';
 
-        it('Deve renderizar toast com mensagem de sucesso', () => {
-            const message = 'Success message';
-            const type = 'success';
+    render(<Toast message={message} type={type} />);
 
-            render(<Toast message={message} type={type} />);
+    const toastElement = screen.getByText(/Success message/i);
 
-            const toastElement = screen
-                .findByText(/Success message/i);
+    expect(toastElement).toBeInTheDocument();
+  });
 
-            expect(toastElement).not.toBeNull();
-        });
+  it('Deve renderizar o Toast de sucesso', () => {
+    const message = 'Success message';
+    const type = 'success';
 
-        it('Deve renderizar toast com o tipo de success', () => {
+    render(<Toast message={message} type={type} />);
 
-            const message = 'Success message';
-            const type = 'success';
+    const toastElement = screen.getByText(/success/i);
 
-            render(<Toast message={message} type={type} />);
+    expect(toastElement).toBeInTheDocument();
+  });
 
-            const toastElement = screen
-                .findByText(/success/i);
+  it('Deve renderizar o Toast com uma mensagem de erro', () =>{
+    const message = 'Danger message';
+    const type = 'danger';
+    render(<Toast message={message} type={type} />);
+    const toastElement = screen.findByText(/Danger message/i);
+    expect(toastElement).not.toBeNull();
+  })
 
-            expect(toastElement).not.toBeNull();
-        });
+  // it('should have no accessibility violations', async () => {
+  //   const message = 'Success message';
+  //   const type = 'success';
 
-        it('Deve renderizar toast com o tipo de danger', () => {
+  //   const { container } = render(<Toast message={message} type={type} />);
 
-            const message = 'Success message';
-            const type = 'danger';
+  //   const results = await axe(container);
 
-            render(<Toast message={message} type={type} />);
-
-            const toastElement = screen
-                .findByText(/danger/i);
-
-            expect(toastElement).not.toBeNull();
-        });
-
-    });
-    
+  //   expect(results).toHaveNoViolations();
+  // });
 });
