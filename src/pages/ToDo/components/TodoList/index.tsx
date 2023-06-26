@@ -9,7 +9,7 @@ interface TodoListProps {
     onChangeCheckbox: (id: string) => void;
 }
 
-const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
+export const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
     const { taskListState } = useToDoContext();
     const isTaskListEmpty = useMemo<boolean>(
         () => taskListState.length === 0,
@@ -23,7 +23,7 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
             {isTaskListEmpty ? (
                 <NoContent />
             ) : (
-                <section className={styles.section_container}>
+                <section data-testid="section-todo-list" className={styles.section_container}>
                     {taskListState.map((task) => (
                         <article
                             key={task.id}
@@ -35,7 +35,7 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
                                 onChange={() => onChangeCheckbox(task.id)}
                                 defaultChecked={task.isDone}
                             />
-                            <p
+                            <p data-testid="text-todo-list"
                                 className={
                                     task.isDone
                                         ? styles.text_scratched
