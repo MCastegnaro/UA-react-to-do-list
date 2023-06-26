@@ -60,4 +60,4 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
 
 const MemoizedTodoList = memo(TodoList);
 
-export { MemoizedTodoList };
+export { MemoizedTodoList, TodoList };
