@@ -15,5 +15,5 @@ describe("<Todo />", () => {
   it("Deve renderizar o content corretamente", () => {
     const content = screen.getByTestId("content");
     expect(content).not.toBeNull();
-  })
-})
+  });
+});
