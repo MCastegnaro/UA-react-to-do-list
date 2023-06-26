@@ -75,6 +75,7 @@ export const Content = () => {
       <main>
         <article className={styles.input_container}>
           <input
+            data-testid="input-description"
             className={styles.input}
             type="text"
             value={description}
@@ -84,6 +85,7 @@ export const Content = () => {
             }
           />
           <button
+            data-testid="button-content"
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
