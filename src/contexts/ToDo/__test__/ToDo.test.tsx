@@ -48,7 +48,7 @@ describe("ToastProvider", () => {
                     { id: "1", description: "Task 1", isDone: false },
                     { id: "2", description: "Task 2", isDone: true }
                 ]);
-            }, []);
+            }, [setTaskListState]);
 
             return (
                 <>
