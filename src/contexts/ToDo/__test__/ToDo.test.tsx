@@ -10,7 +10,7 @@ export type Task = {
 };
 
 describe("ToastProvider", () => {
-    it("Deve renderizar um children quando passado por parâmetro", () => {
+    it("renderizar um children quando passado por parâmetro", () => {
         render(<ToDoContextProvider>
             <h1>Testando o ToDo Provider</h1>
         </ToDoContextProvider>)
@@ -19,7 +19,7 @@ describe("ToastProvider", () => {
         expect(childElement).not.toBeNull();
     })
 
-    it("Deve fornecer o contexto correto para os componentes filhos", () => {
+    it("fornecer o contexto para os componentes filhos", () => {
         let contextValue: ToDoContextProps | undefined;
 
         const ChildComponent = () => {
@@ -39,7 +39,7 @@ describe("ToastProvider", () => {
         expect(contextValue?.setTaskListState).toBeDefined();
     });
 
-    it("Deve atualizar o estado do contexto corretamente", () => {
+    it("atualizar o estado do contexto ", () => {
         const ChildComponent = () => {
             const { taskListState, setTaskListState } = React.useContext<ToDoContextProps>(ToDoContext);
 
