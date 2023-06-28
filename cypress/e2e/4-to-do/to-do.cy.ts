@@ -22,5 +22,13 @@ describe('example to-do app', () => {
             cy.get('._button_x3dtl_75').should("be.visible");
             cy.get('._button_x3dtl_75 > img').should("be.visible");
         });
+
+        it('Deve desabilitar o botão de criar quando o input estiver vazio', () => {
+            cy.get('._input_x3dtl_21').should("be.visible");
+
+            cy.get('._button_x3dtl_75')
+                .should("be.visible")
+                .should("be.disabled");
+        });
     });
 });
