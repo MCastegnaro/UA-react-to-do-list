@@ -21,5 +21,16 @@ describe('example to-do app', () => {
 
             cy.get('img').should("be.visible")
         })
+
+        describe("E clicar na imagem de banner", () => {
+            it('Deve navegar para a listagem de tarefas', () => {
+                cy.viewport("macbook-15")
+                cy.visit('http://127.0.0.1:3000')
+    
+                cy.get('img').should("be.visible")
+                cy.get('img').click()
+                cy.url().should("include", "/to-do")
+            })
+        })
     })
 })
