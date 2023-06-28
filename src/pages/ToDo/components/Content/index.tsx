@@ -49,7 +49,12 @@ export const Content = () => {
     (id: string) => {
       deleteTask(id).then(() =>
         setTaskListState((currentValue) => removeTask(currentValue, id))
-      );
+      ).finally(() => {
+        showToast({
+          message: "Tarefa removida com sucesso",
+          type: 'danger'
+        })
+      })
     },
     [setTaskListState]
   );
