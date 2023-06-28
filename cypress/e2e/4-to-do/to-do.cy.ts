@@ -60,5 +60,11 @@ describe('<ToDo>', () => {
             cy.get('._tasks_created_x3dtl_159').should("contain.text", "Tarefas Criadas");
             cy.get(':nth-child(1) > ._span_value_x3dtl_191').should("be.visible");
         });
+
+        it('Deve exibir o texto de tarefas concluídas e seu campo de contagem da quantidade de tarefas concluídas', () => {
+            cy.get('._content_header_x3dtl_129 > :nth-child(2)').should("be.visible");
+            cy.get('._tasks_done_x3dtl_175').should("contain.text", "Concluídas");
+            cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
+        });
     });
 });
