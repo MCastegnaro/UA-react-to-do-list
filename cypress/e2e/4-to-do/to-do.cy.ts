@@ -13,5 +13,9 @@ describe('example to-do app', () => {
         it('Deve exibir o logo do sistema', () => {
             cy.get('._img_h3s54_21').should("be.visible");
         });
+
+        it('Deve exibir um campo de entrada(input) para adicionar uma nova tarefa', () => {
+            cy.get('._input_x3dtl_21').should("be.visible");
+        });
     });
 });
