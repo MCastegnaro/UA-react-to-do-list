@@ -42,5 +42,9 @@ describe('example to-do app', () => {
                 .should("be.visible")
                 .should("not.be.disabled");
         });
+
+        it('Deve exibir o conteúdo da página abaixo do header', () => {
+            cy.get('[data-testid="content"]').should("be.visible");
+        });
     });
 });
