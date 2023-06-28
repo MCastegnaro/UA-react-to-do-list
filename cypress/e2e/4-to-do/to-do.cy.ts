@@ -90,35 +90,6 @@ describe('<ToDo>', () => {
             cy.get('._img_14eu5_85').should("be.visible");
         });
 
-        // it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"; em seguida, excluir a tarefa ao clicar no ícone de lixeira e verificar a contagem atualizada', () => {
-        //     const novaTarefa = "Nova tarefa";
-
-        //     // Obter o número inicial de tarefas
-        //     cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
-        //       const numeroTarefasInicial = parseInt($span.text());
-
-        //       // Adicionar uma nova tarefa
-        //       cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
-        //       cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
-
-        //       // Verificar se a tarefa foi adicionada corretamente
-        //       cy.get('._section_container_14eu5_1').should('have.length', 1);
-        //       cy.get('._text_14eu5_51').contains(novaTarefa);
-
-        //       // Clicar no ícone de lixeira para excluir a tarefa
-        //       cy.get('._img_14eu5_85').should("be.visible").click();
-
-        //       // Verificar se a tarefa foi excluída corretamente
-        //       cy.get('._section_container_14eu5_1').should('have.length', 0);
-
-        //       // Verificar se o número de tarefas foi atualizado corretamente
-        //       cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(($spanAtualizado) => {
-        //         const numeroTarefasAtualizado = parseInt($spanAtualizado.text());
-        //         expect(numeroTarefasAtualizado).to.equal(numeroTarefasInicial - 1);
-        //       });
-        //     });
-        //   });
-
         it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
             cy.wait(2000).then(() => {
                 cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
@@ -134,7 +105,33 @@ describe('<ToDo>', () => {
                     });
                 });
             });
+        });
 
+        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira e verificar a contagem atualizada', () => {
+            cy.wait(2000).then(() => {
+                const novaTarefa = "Nova tarefa";
+
+                cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
+                    const numeroTarefasInicial = parseInt($span.text());
+
+                    cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
+                    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+                    cy.get('._section_container_14eu5_1').should('have.length', 1);
+                    cy.get('._text_14eu5_51').contains(novaTarefa);
+
+                    cy.get('._img_14eu5_85').each(($el) => {
+                        cy.wrap($el).click();
+                    });
+
+                    cy.wait(1000);
+
+                    cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(($spanAtualizado) => {
+                        const numeroTarefasAtualizado = parseInt($spanAtualizado.text());
+                        expect(numeroTarefasAtualizado).to.equal(numeroTarefasInicial - 1);
+                    });
+                });
+            });
         });
     });
 });
