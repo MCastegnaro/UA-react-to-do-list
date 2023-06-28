@@ -46,5 +46,9 @@ describe('example to-do app', () => {
         it('Deve exibir o conteúdo da página abaixo do header', () => {
             cy.get('[data-testid="content"]').should("be.visible");
         });
+
+        it('Deve exibir o contêiner principal que contém a listagem de tarefas', () => {
+            cy.get('main').should("be.visible");
+        });
     });
 });
