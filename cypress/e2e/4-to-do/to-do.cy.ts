@@ -30,5 +30,13 @@ describe('example to-do app', () => {
                 .should("be.visible")
                 .should("be.disabled");
         });
+
+        it('Deve habilitar o botão de criar quando o input contiver texto', () => {
+            cy.get('._input_x3dtl_21').should("be.visible").type("Nova tarefa");
+
+            cy.get('._button_x3dtl_75')
+                .should("be.visible")
+                .should("not.be.disabled");
+        });
     });
 });
