@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 export const api = axios.create({
-  baseURL: "https://ua-todo-list-api.onrender.com/",
+  baseURL: "https://json-server-render-u1g4.onrender.com/",
 });
 
 export const apiRequest = async <T>(config: AxiosRequestConfig): Promise<T> => {
