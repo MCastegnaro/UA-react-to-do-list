@@ -82,6 +82,10 @@ describe('<ToDo>', () => {
             cy.get('[data-testid="circulo-status-tarefa"]').should("be.visible");
         });
 
+        it('Deve conter um texto representando nome da tarefa dentro do container de uma tarefa criada', () => {
+            cy.get('._text_14eu5_51').should("be.visible");
+        });
+
         // it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
         //     cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
         //         const numeroTarefasInicial = parseInt($span.text());
