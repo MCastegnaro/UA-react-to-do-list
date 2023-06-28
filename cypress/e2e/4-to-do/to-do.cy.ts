@@ -47,7 +47,7 @@ describe('<ToDo>', () => {
             cy.get('[data-testid="content"]').should("be.visible");
         });
 
-        it('Deve exibir o contêiner principal que contém a listagem de tarefas', () => {
+        it('Deve exibir o contêiner principal que contém o contêiner com listagem de tarefas', () => {
             cy.get('main').should("be.visible");
         });
 
@@ -65,6 +65,17 @@ describe('<ToDo>', () => {
             cy.get('._content_header_x3dtl_129 > :nth-child(2)').should("be.visible");
             cy.get('._tasks_done_x3dtl_175').should("contain.text", "Concluídas");
             cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
+        });
+
+        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"', () => {
+            const novaTarefa = "Nova tarefa";
+
+            cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
+
+            cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+            cy.get('._section_container_14eu5_1').should('have.length', 1);
+            cy.get('._text_14eu5_51').contains(novaTarefa);
         });
     });
 });
