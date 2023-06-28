@@ -77,5 +77,22 @@ describe('<ToDo>', () => {
             cy.get('._section_container_14eu5_1').should('have.length', 1);
             cy.get('._text_14eu5_51').contains(novaTarefa);
         });
+
+        // it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
+        //     cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
+        //         const numeroTarefasInicial = parseInt($span.text());
+
+        //         const novaTarefa = "Nova tarefa";
+        //         cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
+        //         cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+        //         cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(($spanAtualizado) => {
+        //             const numeroTarefasAtualizado = parseInt($spanAtualizado.text());
+        //             expect(numeroTarefasAtualizado).to.equal(numeroTarefasInicial + 1);
+        //         });
+        //     });
+        // });
+
+
     });
 });
