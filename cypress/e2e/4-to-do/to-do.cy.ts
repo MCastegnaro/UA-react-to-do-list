@@ -10,6 +10,10 @@ describe('example to-do app', () => {
 
     context('Quando acessar a página de ToDo', () => {
 
+        it('Deve exibir o header do sistema', () => {
+            cy.get('[data-testid="header"]').should("be.visible");
+        });
+
         it('Deve exibir o logo do sistema', () => {
             cy.get('._img_h3s54_21').should("be.visible");
         });
