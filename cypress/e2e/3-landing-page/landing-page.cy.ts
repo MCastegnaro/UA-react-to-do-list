@@ -1,4 +1,4 @@
-describe('example to-do app', () => {
+describe('<Landing Page>', () => {
 
     context('Quando acessar a home do projeto', () => {
         it('Deve exibir uma tag h1 com o titulo do sistema', () => {

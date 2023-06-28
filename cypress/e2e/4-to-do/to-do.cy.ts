@@ -1,4 +1,4 @@
-describe('example to-do app', () => {
+describe('<ToDo>', () => {
 
     beforeEach(() => {
         cy.viewport("macbook-15");
@@ -49,6 +49,10 @@ describe('example to-do app', () => {
 
         it('Deve exibir o contêiner principal que contém a listagem de tarefas', () => {
             cy.get('main').should("be.visible");
+        });
+
+        it('Deve verificar a exibição do cabeçalho(header) dentro do contêiner principal, o qual inclui informações sobre a contagem de tarefas criadas e concluídas', () => {
+            cy.get('._content_header_x3dtl_129').should("be.visible");
         });
     });
 });
