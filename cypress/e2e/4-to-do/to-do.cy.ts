@@ -43,6 +43,11 @@ describe('<ToDo>', () => {
             cy.get('[data-testid="content"]').should("be.visible");
         });
 
+        it('Caso não haja tarefas criadas, uma imagem deve ser visível e, abaixo dela, um texto dizendo que não há tarefas criadas', () => {
+            cy.get('._section_container_1a9zj_1 > img').should("be.visible");
+            cy.get('._text_1a9zj_29').should("be.visible");
+        });
+
         it('Deve exibir o contêiner principal que contém o contêiner com listagem de tarefas', () => {
             cy.get('main').should("be.visible");
         });
@@ -62,9 +67,9 @@ describe('<ToDo>', () => {
             cy.get('._tasks_done_x3dtl_175').should("contain.text", "Concluídas");
             cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
         });
-        context('Criação, verificação do conteúdo, edição de status e remoção de tarefas', () => {
 
-            it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"', () => {
+        context('Deve fazer a criação, verificação do conteúdo, edição de status e remoção de tarefas', () => {
+            it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar" e verifica se o Toast está visível', () => {
                 const novaTarefa = "Nova tarefa";
 
                 cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
