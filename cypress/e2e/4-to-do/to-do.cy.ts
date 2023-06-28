@@ -16,8 +16,9 @@ describe('<ToDo>', () => {
             cy.get('._img_h3s54_21').should("be.visible");
         });
 
-        it('Deve exibir um campo de entrada(input) para adicionar uma nova tarefa', () => {
+        it('Deve exibir um campo de entrada(input) para adicionar uma nova tarefa e o texto no placeholder "Adicione uma nova tarefa"', () => {
             cy.get('._input_x3dtl_21').should("be.visible");
+            cy.get('._input_x3dtl_21[placeholder="Adicione uma nova tarefa"]').should('exist');
         });
 
         it('Deve exibir um botão de criar uma nova tarefa', () => {
