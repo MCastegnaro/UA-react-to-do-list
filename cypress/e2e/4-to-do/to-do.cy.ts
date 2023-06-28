@@ -51,8 +51,14 @@ describe('<ToDo>', () => {
             cy.get('main').should("be.visible");
         });
 
-        it('Deve verificar a exibição do cabeçalho(header) dentro do contêiner principal, o qual inclui informações sobre a contagem de tarefas criadas e concluídas', () => {
+        it('Deve exibir o cabeçalho(header) dentro do contêiner principal, o qual inclui informações sobre a contagem de tarefas criadas e concluídas', () => {
             cy.get('._content_header_x3dtl_129').should("be.visible");
+        });
+
+        it('Deve exibir o texto de tarefas criadas e seu campo de contagem da quantidade de tarefas criadas', () => {
+            cy.get('._content_header_x3dtl_129 > :nth-child(1)').should("be.visible");
+            cy.get('._tasks_created_x3dtl_159').should("contain.text", "Tarefas Criadas");
+            cy.get(':nth-child(1) > ._span_value_x3dtl_191').should("be.visible");
         });
     });
 });
