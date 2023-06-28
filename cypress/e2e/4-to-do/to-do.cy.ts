@@ -27,7 +27,6 @@ describe('<ToDo>', () => {
 
         it('Deve desabilitar o botão de criar quando o input estiver vazio', () => {
             cy.get('._input_x3dtl_21').should("be.visible");
-
             cy.get('._button_x3dtl_75')
                 .should("be.visible")
                 .should("be.disabled");
@@ -35,7 +34,6 @@ describe('<ToDo>', () => {
 
         it('Deve habilitar o botão de criar quando o input contiver texto', () => {
             cy.get('._input_x3dtl_21').should("be.visible").type("Nova tarefa");
-
             cy.get('._button_x3dtl_75')
                 .should("be.visible")
                 .should("not.be.disabled");
@@ -75,6 +73,8 @@ describe('<ToDo>', () => {
 
                 cy.get('._section_container_14eu5_1').should('have.length', 1);
                 cy.get('._text_14eu5_51').contains(novaTarefa);
+
+                cy.get('[data-testid="circulo-status-tarefa"]').should('be.visible');
             });
 
             it('Deve conter um círculo representando o status da tarefa dentro do container de uma tarefa criada', () => {
