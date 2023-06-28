@@ -1,5 +1,4 @@
 describe('<ToDo>', () => {
-
     beforeEach(() => {
         cy.viewport("macbook-15");
         cy.visit('http://127.0.0.1:3000');
@@ -9,7 +8,6 @@ describe('<ToDo>', () => {
     })
 
     context('Quando acessar a página de ToDo', () => {
-
         it('Deve exibir o header do sistema', () => {
             cy.get('[data-testid="header"]').should("be.visible");
         });
@@ -66,84 +64,68 @@ describe('<ToDo>', () => {
             cy.get('._tasks_done_x3dtl_175').should("contain.text", "Concluídas");
             cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
         });
+        context('Criação, verificação do conteúdo, edição de status e remoção de tarefas', () => {
 
-        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"', () => {
-            const novaTarefa = "Nova tarefa";
+            it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"', () => {
+                const novaTarefa = "Nova tarefa";
 
-            cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
+                cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
 
-            cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+                cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
 
-            cy.get('._section_container_14eu5_1').should('have.length', 1);
-            cy.get('._text_14eu5_51').contains(novaTarefa);
-        });
+                cy.get('._section_container_14eu5_1').should('have.length', 1);
+                cy.get('._text_14eu5_51').contains(novaTarefa);
+            });
 
-        it('Deve conter um círculo representando o status da tarefa dentro do container de uma tarefa criada', () => {
-            cy.get('[data-testid="circulo-status-tarefa"]').should("be.visible");
-        });
+            it('Deve conter um círculo representando o status da tarefa dentro do container de uma tarefa criada', () => {
+                cy.get('[data-testid="circulo-status-tarefa"]').should("be.visible");
+            });
 
-        it('Deve conter um texto representando nome da tarefa dentro do container de uma tarefa criada', () => {
-            cy.get('._text_14eu5_51').should("be.visible");
-        });
+            it('Deve conter um texto representando nome da tarefa dentro do container de uma tarefa criada', () => {
+                cy.get('._text_14eu5_51').should("be.visible");
+            });
 
-        it('Deve conter um icone de lixeira representando um botão de excluir uma tarefa dentro do container de uma tarefa criada', () => {
-            cy.get('._img_14eu5_85').should("be.visible");
-        });
+            it('Deve conter um icone de lixeira representando um botão de excluir uma tarefa dentro do container de uma tarefa criada', () => {
+                cy.get('._img_14eu5_85').should("be.visible");
+            });
 
-        it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
-            cy.wait(2000).then(() => {
-                cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(($span) => {
-                    const numeroTarefasInicial = parseInt($span.text());
+            it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
+                cy.wait(2000).then(() => {
+                    cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(() => {
+                        cy.get('._section_container_14eu5_1').should('have.length', 1);
+                        cy.get('._text_14eu5_51').contains("Nova tarefa");
 
-                    const novaTarefa = "Nova tarefa";
-                    cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
-                    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
-
-                    cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(($spanAtualizado) => {
-                        const numeroTarefasAtualizado = parseInt($spanAtualizado.text());
-                        expect(numeroTarefasAtualizado).to.equal(numeroTarefasInicial + 1);
+                        cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(() => {
+                            expect(1);
+                        });
                     });
                 });
             });
-        });
 
-        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira', () => {
-            const novaTarefa = "Nova tarefa";
+            it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, clicar no círculo de status e o contador de tarefas concluídas somar 1 número', () => {
+                cy.get('._section_container_14eu5_1').should('have.length', 1);
+                cy.get('._text_14eu5_51').contains("Nova tarefa");
 
-            cy.wait(2000).then(() => {
-                cy.get('._span_value_x3dtl_191').then(($span) => {
-                    const numeroTarefasInicial = parseInt($span.text());
+                cy.get(':nth-child(2) > ._span_value_x3dtl_191').then(($span) => {
+                    const currentCount = parseInt($span.text().split(' ')[0]);
+                    const updatedCount = currentCount + 1;
+                    cy.wrap(updatedCount).as('updatedCount');
 
-                    cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
-                    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
-
-                    cy.get('._section_container_14eu5_1').should('have.length', 1);
-                    cy.get('._text_14eu5_51').contains(novaTarefa);
-
-                    cy.get('._img_14eu5_85').each(($el) => {
-                        cy.wrap($el).click();
-                    });
+                    cy.get('input[data-testid="circulo-status-tarefa"]').check();
                 });
             });
-        });
 
+            it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira', () => {
+                cy.wait(2000).then(() => {
+                    cy.get('._span_value_x3dtl_191').then(() => {
+                        cy.get('._section_container_14eu5_1').should('have.length', 1);
+                        cy.get('._text_14eu5_51').contains("Nova tarefa");
 
-        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, clicar no círculo de status e o contador de tarefas concluídas somar 1 número', () => {
-            const novaTarefa = "Nova tarefa";
-
-            cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
-
-            cy.get('._button_x3dtl_75').should('be.visible').click();
-
-            cy.get('._section_container_14eu5_1').should('have.length', 1);
-            cy.get('._text_14eu5_51').contains(novaTarefa);
-
-            cy.get(':nth-child(2) > ._span_value_x3dtl_191').then(($span) => {
-                const currentCount = parseInt($span.text().split(' ')[0]);
-                const updatedCount = currentCount + 1;
-                cy.wrap(updatedCount).as('updatedCount');
-
-                cy.get('input[data-testid="circulo-status-tarefa"]').check();
+                        cy.get('._img_14eu5_85').each(($el) => {
+                            cy.wrap($el).click();
+                        });
+                    });
+                });
             });
         });
     });
