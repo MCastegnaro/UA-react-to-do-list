@@ -29,7 +29,7 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
                             key={task.id}
                             className={styles.content_container}
                         >
-                            <input
+                            <input data-testid="circulo-status-tarefa"
                                 type="checkbox"
                                 id={task.id}
                                 onChange={() => onChangeCheckbox(task.id)}

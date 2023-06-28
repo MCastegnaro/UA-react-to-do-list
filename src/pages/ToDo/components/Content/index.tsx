@@ -96,7 +96,7 @@ export const Content = () => {
         <article className={styles.content_header}>
           <article className={styles.tasks_container}>
             <p className={styles.tasks_created}>Tarefas Criadas</p>
-            <span className={styles.span_value}>
+            <span data-testid="circulo-criadas" className={styles.span_value}>
               {taskListState.length}
             </span>
           </article>
