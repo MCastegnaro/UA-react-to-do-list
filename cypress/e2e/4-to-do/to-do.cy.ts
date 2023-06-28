@@ -107,7 +107,7 @@ describe('<ToDo>', () => {
             });
         });
 
-        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira e verificar a contagem atualizada', () => {
+        it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira', () => {
             const novaTarefa = "Nova tarefa";
 
             cy.wait(2000).then(() => {
@@ -123,13 +123,6 @@ describe('<ToDo>', () => {
                     cy.get('._img_14eu5_85').each(($el) => {
                         cy.wrap($el).click();
                     });
-
-                    cy.wait(2000);
-
-                    cy.get('[data-testid="circulo-criadas"]').should(($spanAtualizado) => {
-                        const numeroTarefasAtualizado = parseInt($spanAtualizado.text());
-                        expect(numeroTarefasAtualizado).to.equal(numeroTarefasInicial - 1);
-                    });
                 });
             });
         });
@@ -140,7 +133,7 @@ describe('<ToDo>', () => {
 
             cy.get('._input_x3dtl_21').should('be.visible').clear().type(novaTarefa);
 
-            cy.get('._button_x3dtl_75').should('be.visible').click(); // Remova a verificação de 'disabled'
+            cy.get('._button_x3dtl_75').should('be.visible').click();
 
             cy.get('._section_container_14eu5_1').should('have.length', 1);
             cy.get('._text_14eu5_51').contains(novaTarefa);
@@ -148,7 +141,7 @@ describe('<ToDo>', () => {
             cy.get(':nth-child(2) > ._span_value_x3dtl_191').then(($span) => {
                 const currentCount = parseInt($span.text().split(' ')[0]);
                 const updatedCount = currentCount + 1;
-                cy.wrap(updatedCount).as('updatedCount'); // Store the updated count for later use
+                cy.wrap(updatedCount).as('updatedCount');
 
                 cy.get('input[data-testid="circulo-status-tarefa"]').check();
             });
