@@ -1,10 +1,10 @@
 describe('<ToDo>', () => {
   beforeEach(() => {
-    cy.viewport("macbook-15"); //abre a tela com o tamanho de um macbook-15
-    cy.visit('http://localhost:3000') //entrar no localhost 3000
-    cy.get('img').should("be.visible"); //verificar se a imagem (capa) está visivel
-    cy.get('img').click(); //clicar na imagem para entrar no to-do
-    cy.url().should("include", "/to-do"); //incluir o /to-do na url
+    cy.viewport("macbook-15");
+    cy.visit('http://localhost:3000')
+    cy.get('img').should("be.visible");
+    cy.get('img').click();
+    cy.url().should("include", "/to-do");
   })
 
   it('Deve exibir o header', () => {
@@ -68,6 +68,39 @@ describe('<ToDo>', () => {
     cy.get('._img_14eu5_85').should("be.visible");
   });
 
-  
+  it('Deve aumentar o número de tarefas criadas ao adicionar uma nova tarefa', () => {
+    cy.wait(2000).then(() => {
+      cy.get(':nth-child(1) > ._span_value_x3dtl_191').then(() => {
+        cy.get('._section_container_14eu5_1').should('have.length', 1);
+        cy.get('._text_14eu5_51').contains("Nova tarefa");
+        cy.get(':nth-child(1) > ._span_value_x3dtl_191').should(() => {
+          expect(1);
+        });
+      });
+    });
+  });
+
+  it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, clicar no círculo de status e o contador de tarefas concluídas somar 1 número', () => {
+    cy.get('._section_container_14eu5_1').should('have.length', 1);
+    cy.get('._text_14eu5_51').contains("Nova tarefa");
+    cy.get(':nth-child(2) > ._span_value_x3dtl_191').then(($span) => {
+      const currentCount = parseInt($span.text().split(' ')[0]);
+      const updatedCount = currentCount + 1;
+      cy.wrap(updatedCount).as('updatedCount');
+      cy.get('input[data-testid="circulo-status-tarefa"]').check();
+    });
+  });
+
+  it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar", em seguida, excluir a tarefa ao clicar no ícone de lixeira', () => {
+    cy.wait(2000).then(() => {
+      cy.get('._span_value_x3dtl_191').then(() => {
+        cy.get('._section_container_14eu5_1').should('have.length', 1);
+        cy.get('._text_14eu5_51').contains("Nova tarefa");
+        cy.get('._img_14eu5_85').each(($el) => {
+          cy.wrap($el).click();
+        });
+      });
+    });
+  });
 
 })
