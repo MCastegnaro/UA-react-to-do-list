@@ -43,5 +43,39 @@ describe('test To Do page', () => {
     cy.get('main').should("be.visible");
   });
 
+  it('should create a new task and check toast', () => {
+    const newTaskName = "New Task";
+
+    cy.get('._input_x3dtl_21').should('be.visible').clear().type(newTaskName);
+
+    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+    cy.get('._section_container_14eu5_1').should('have.length', 1);
+    cy.get('._text_14eu5_51').contains(newTaskName);
+
+  });
+
+  it('should contain the task name', () => {
+    cy.get('._text_14eu5_51').should("be.visible");
+  });
+
+  it('should contain an delete option', () => {
+    cy.get('._img_14eu5_85').should("be.visible");
+  });
+
+  it('should mark all as done', () => {
+    cy.get('._input_x3dtl_21').should('be.visible').clear().type("to be mark as done");
+
+    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+  });
+
+  it('should delete all', () => {
+    cy.get('._input_x3dtl_21').should('be.visible').clear().type("to be deleted");
+
+    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+
+    cy.get('img[alt="Ícone de lixeira"]').click({ multiple: true })
+  });
 
 })
