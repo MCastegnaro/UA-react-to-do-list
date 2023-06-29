@@ -82,11 +82,13 @@ export const Content = () => {
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setDescription(event.target.value)
             }
+            aria-label="nova-task-input"
           />
           <button
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
+            aria-label="nova-task-botao"
           >
             Criar
             <img src={Plus} alt="Ícone de mais" />
@@ -96,7 +98,7 @@ export const Content = () => {
         <article className={styles.content_header}>
           <article className={styles.tasks_container}>
             <p className={styles.tasks_created}>Tarefas Criadas</p>
-            <span className={styles.span_value}>
+            <span className={styles.span_value} aria-label="todo-list-length">
               {taskListState.length}
             </span>
           </article>
