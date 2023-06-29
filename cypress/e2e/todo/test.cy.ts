@@ -35,6 +35,12 @@ describe('Testes da página de todo', () => {
         cy.get(`[aria-label="todo-list"]`).find(`article`).last().find('input').should("not.be.checked")
     });
 
+    it('Deve mostrar o número certo de tasks', () => {
+      cy.get(`[aria-label="todo-list"]`).find(`article`).its("length").then(n => {
+        cy.get(`[aria-label="todo-list-length"]`).should("have.text", n.toString())
+      })
+  });
+
     it('Deve mostrar o no content caso delete todas as tasks', () => {
         cy.get(`[aria-label="todo-list"]`).find(`article`).each(el => {
             el.find('img').click()

@@ -98,7 +98,7 @@ export const Content = () => {
         <article className={styles.content_header}>
           <article className={styles.tasks_container}>
             <p className={styles.tasks_created}>Tarefas Criadas</p>
-            <span className={styles.span_value}>
+            <span className={styles.span_value} aria-label="todo-list-length">
               {taskListState.length}
             </span>
           </article>
