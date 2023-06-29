@@ -23,19 +23,22 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
             {isTaskListEmpty ? (
                 <NoContent />
             ) : (
-                <section className={styles.section_container}>
-                    {taskListState.map((task) => (
+                <section className={styles.section_container} aria-label="todo-list">
+                    {taskListState.map((task, i) => (
                         <article
+                            aria-label={`todo-list-${i}`}
                             key={task.id}
                             className={styles.content_container}
                         >
                             <input
+                                aria-label={`todo-list-${i}-check`}
                                 type="checkbox"
                                 id={task.id}
                                 onChange={() => onChangeCheckbox(task.id)}
                                 defaultChecked={task.isDone}
                             />
                             <p
+                                aria-label={`todo-list-${i}-desc`}
                                 className={
                                     task.isDone
                                         ? styles.text_scratched
@@ -45,6 +48,7 @@ const TodoList = ({ onDelete, onChangeCheckbox }: TodoListProps) => {
                                 {task.description}
                             </p>
                             <img
+                                aria-label={`todo-list-${i}-delete`}
                                 className={styles.img}
                                 src={Trash}
                                 alt="Ícone de lixeira"

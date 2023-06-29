@@ -82,11 +82,13 @@ export const Content = () => {
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setDescription(event.target.value)
             }
+            aria-label="nova-task-input"
           />
           <button
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
+            aria-label="nova-task-botao"
           >
             Criar
             <img src={Plus} alt="Ícone de mais" />

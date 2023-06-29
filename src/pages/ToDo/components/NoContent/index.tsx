@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 
 export const NoContent = () => {
   return (
-    <section className={styles.section_container}>
+    <section className={styles.section_container} aria-label="no-content">
       <img src={Clipboard} alt="ícone de clipboard" />
       <p className={styles.text}>
         <strong> Você ainda não tem tarefas cadastradas</strong>
