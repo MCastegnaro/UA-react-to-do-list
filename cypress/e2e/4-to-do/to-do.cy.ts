@@ -63,4 +63,11 @@ describe('<ToDo>', () => {
     cy.get('._text_14eu5_51').contains("Nova tarefa");
   });
 
+  it('Deve conter um texto, e um icone de lixeira dentro do container da task', () => {
+    cy.get('._text_14eu5_51').should("be.visible");
+    cy.get('._img_14eu5_85').should("be.visible");
+  });
+
+  
+
 })
