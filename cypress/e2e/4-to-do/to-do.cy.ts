@@ -56,5 +56,11 @@ describe('<ToDo>', () => {
     cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
   });
 
-  
+  it('Deve adicionar uma nova tarefa ao inserir um texto no input e clicar no botão "Criar"', () => {
+    cy.get('._input_x3dtl_21').should('be.visible').clear().type("Nova tarefa");
+    cy.get('._button_x3dtl_75').should('be.visible').should('not.be.disabled').click();
+    cy.get('._section_container_14eu5_1').should('have.length', 1);
+    cy.get('._text_14eu5_51').contains("Nova tarefa");
+  });
+
 })
