@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('<Landing Page>', () => {
 
   context('Quando acessar a home do projeto', () => {
