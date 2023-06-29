@@ -35,5 +35,26 @@ describe('<ToDo>', () => {
     cy.get('._button_x3dtl_75').should("be.visible").should("not.be.disabled");
   });
 
+  it('Se não tiver tasks, deve ter uma imagem e um texto dizendo que não tem tasks para fazer', () => {
+    cy.get('._section_container_1a9zj_1 > img').should("be.visible");
+    cy.get('._text_1a9zj_29').should("be.visible");
+  });
+
+  it('Deve exibir o cabeçalho abaixo do input, que mostra o numero de tanks que tem, e quantas tasks foram feitas', () => {
+    cy.get('._content_header_x3dtl_129').should("be.visible");
+  });
+
+  it('Deve exibir o texto de Tarefas Criadas e seu campo de quantidade de tarefas criadas', () => {
+    cy.get('._content_header_x3dtl_129 > :nth-child(1)').should("be.visible");
+    cy.get('._tasks_created_x3dtl_159').should("contain.text", "Tarefas Criadas");
+    cy.get(':nth-child(1) > ._span_value_x3dtl_191').should("be.visible");
+  });
+
+  it('Deve exibir o texto de Tarefas Concluídas e seu campo de quantidade de tarefas concluídas', () => {
+    cy.get('._content_header_x3dtl_129 > :nth-child(2)').should("be.visible");
+    cy.get('._tasks_done_x3dtl_175').should("contain.text", "Concluídas");
+    cy.get(':nth-child(2) > ._span_value_x3dtl_191').should("be.visible");
+  });
+
   
 })
