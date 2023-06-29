@@ -30,8 +30,18 @@ describe('test To Do page', () => {
   });
 
   it('should enable create button when input has content', () => {
-      cy.get('._input_x3dtl_21').should("be.visible").type("Nova tarefa");
-      cy.get('._button_x3dtl_75').should("be.visible").should("not.be.disabled");
+    cy.get('._input_x3dtl_21').should("be.visible").type("Nova tarefa");
+    cy.get('._button_x3dtl_75').should("be.visible").should("not.be.disabled");
   });
+
+  it('should show warning when tasks are empty', () => {
+    cy.get('._section_container_1a9zj_1 > img').should("be.visible");
+    cy.get('._text_1a9zj_29').should("be.visible");
+  });
+
+  it('should show content tasks', () => {
+    cy.get('main').should("be.visible");
+  });
+
 
 })
