@@ -6,7 +6,7 @@ import { Header } from "./components/Header";
 function ToDo() {
   return (
     <>
-      <Header />
+    <Header/>
       <ToastProvider>
         <ToDoContextProvider>
           <Content />
