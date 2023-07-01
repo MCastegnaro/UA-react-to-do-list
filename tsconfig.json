@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/contexts/ToDo/__test__/.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
