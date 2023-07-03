@@ -1,5 +1,4 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
-
 import Plus from "../../../../assets/plus.svg";
 import useToDoContext from "../../../../hooks/useToDoContext";
 import { useToast } from "../../../../hooks/useToast";
@@ -79,6 +78,7 @@ export const Content = () => {
             type="text"
             value={description}
             placeholder="Adicione uma nova tarefa"
+            data-testid="input"
             onChange={(event: ChangeEvent<HTMLInputElement>) =>
               setDescription(event.target.value)
             }
@@ -87,6 +87,7 @@ export const Content = () => {
             className={styles.button}
             disabled={disabledButton}
             onClick={addTaskOnList}
+            data-testid="button"
           >
             Criar
             <img src={Plus} alt="Ícone de mais" />
